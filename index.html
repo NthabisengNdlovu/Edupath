@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduPath SA - Matric to University Pathway</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-icon">🎓</div>
+          <div>
+            <h1>EduPath SA</h1>
+            <p>AI Solution for Education • Week 4 Bootcamp</p>
+          </div>
+        </div>
+        <div class="header-tag">From Classroom Results to University Doors</div>
+      </div>
+      <div class="header-grad"></div>
+    </header>
+
+    <main class="container">
+      <!-- School & Learner -->
+      <section class="card">
+        <div class="card-head">
+          <h2>🏫 School & Learner Profile</h2>
+          <button class="btn btn-secondary" id="loadDemoBtn">Load Demo Data - Thabo</button>
+        </div>
+        <div class="grid-3">
+          <div class="field"><label>School Name</label><input id="schoolName" placeholder="e.g., Parktown Boys High" value="" /></div>
+          <div class="field"><label>Learner Full Name</label><input id="learnerName" placeholder="e.g., Thabo Nkosi" /></div>
+          <div class="field"><label>Class</label><input id="learnerClass" placeholder="12A" /></div>
+        </div>
+      </section>
+
+      <!-- Subjects Input -->
+      <section class="card">
+        <div class="card-head">
+          <h2>📊 Enter Term Results (%)</h2>
+          <span class="hint">APS: 80-100=7 | 70-79=6 | 60-69=5 | 50-59=4 | 40-49=3 | 30-39=2 | 0-29=1 • LO excluded from APS</span>
+        </div>
+        <div class="table-wrap">
+          <table id="marksTable">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>March %</th>
+                <th>June %</th>
+                <th>Sept %</th>
+                <th>Sept APS</th>
+                <th>Trend</th>
+              </tr>
+            </thead>
+            <tbody id="marksBody"></tbody>
+          </table>
+        </div>
+        <div class="actions">
+          <button class="btn" id="calcBtn">Calculate APS & Qualifications</button>
+          <button class="btn btn-outline" id="addSubjectBtn">+ Add Subject</button>
+        </div>
+      </section>
+
+      <!-- Results Dashboard -->
+      <section id="resultsSection" class="hidden">
+        <div class="grid-4">
+          <div class="stat-card"><span>March APS</span><h3 id="marchAPS">0</h3><small>Best 6 excl. LO</small></div>
+          <div class="stat-card"><span>June APS</span><h3 id="juneAPS">0</h3><small>Best 6 excl. LO</small></div>
+          <div class="stat-card primary"><span>Sept APS</span><h3 id="septAPS">0</h3><small>Current APS</small></div>
+          <div class="stat-card ai"><span>🤖 AI Predicted Final</span><h3 id="predAPS">0</h3><small>Linear trend model</small></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>📈 APS Progress (AI Trend Model)</h3>
+            <canvas id="apsChart" width="600" height="280"></canvas>
+            <p class="insight" id="trendInsight"></p>
+          </div>
+          <div class="card">
+            <h3>📚 Subject Performance - September</h3>
+            <canvas id="subjectChart" width="600" height="280"></canvas>
+            <div id="riskFlags" class="flags"></div>
+          </div>
+        </div>
+
+        <!-- Course Qualifier -->
+        <div class="card">
+          <div class="card-head">
+            <h2>🎯 University Course Qualifier</h2>
+            <div class="filters">
+              <button class="filter active" data-f="all">All</button>
+              <button class="filter" data-f="tech">Science & Tech</button>
+              <button class="filter" data-f="commerce">Commerce</button>
+              <button class="filter" data-f="humanities">Humanities & Law</button>
+              <button class="filter" data-f="health">Health</button>
+            </div>
+          </div>
+          <div class="qual-grid">
+            <div><h4 class="qual-title qualified">✅ Qualified (<span id="qCount">0</span>)</h4><div id="qualifiedList" class="list"></div></div>
+            <div><h4 class="qual-title almost">⚠️ Almost There (<span id="aCount">0</span>)</h4><div id="almostList" class="list"></div></div>
+            <div><h4 class="qual-title not">❌ Not Yet (<span id="nCount">0</span>)</h4><div id="notList" class="list"></div></div>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="card architecture">
+          <h2>🧠 AI Solution Architecture - Week 4 Deliverable</h2>
+          <div class="arch-flow">
+            <div class="arch-step"><span>1</span><h4>Data Input</h4><p>March/June/Sept marks, School profile</p></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step"><span>2</span><h4>APS Engine</h4><p>Best 6 excl LO, Level 1-7 mapping</p></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step ai-step"><span>3</span><h4>Trend AI</h4><p>Linear regression prediction</p></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step ai-step"><span>4</span><h4>Matching AI</h4><p>Rule-based course qualification</p></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-step"><span>5</span><h4>Advisory</h4><p>Personalized pathway</p></div>
+          </div>
+          <div class="resp">
+            <h4>Responsible AI Considerations:</h4>
+            <ul>
+              <li><b>Privacy (POPIA):</b> Learner data stays in browser, no server storage for minors</li>
+              <li><b>Bias:</b> Uses official APS levels, not school ranking</li>
+              <li><b>Transparency:</b> Shows calculation breakdown, not black box</li>
+              <li><b>LO Exclusion:</b> Explained to learners why LO not counted by universities</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Clickatell 1 Month AI Bootcamp • Week 4 - AI Solution Development & Portfolio Finalization • Education Use Case • Nthabiseng Ndlovu - DemandThree</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
